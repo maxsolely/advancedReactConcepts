@@ -1,15 +1,19 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import App from '../App'
+import { shallow } from 'enzyme'
+import App from 'components/App'
+import CommentBox from 'components/CommentBox'
+import CommentList from 'components/CommentList'
+
+let component
+
+beforeEach(() => {
+  component = shallow(<App />)
+})
 
 it('shows a comment box', () => {
-  // create a fake div in the terminal
-  const div = document.createElement('div')
+  expect(component.find(CommentBox).length).toEqual(1)
+})
 
-  // gather all the HTML of the react project and attach 
-  // it to the fake div that we made in the terminal
-  ReactDOM.render(<App />, div)
-  expect(div.innerHTML).toContain('Comment Box')
-  // destroy any leftover objects so we do not overcrowd our memory
-  ReactDOM.unmountComponentAtNode(div)
+it('shows a comment list', () => {
+  expect(component.find(CommentList).length).toEqual(1)
 })
